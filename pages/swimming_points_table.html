@@ -6,6 +6,7 @@
   <title>Swimming</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="font/stylesheet.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style>
@@ -13,7 +14,7 @@
     font-family: 'Ubuntu Light';
     background: rgba(21, 22, 29, .9);
   }
-  .container{width: 80%;min-width: fit-content;max-width: 1024px;}
+  .container{width: 100%;padding: 40px;}
   nav{
     text-align: center;
     margin-top: 15px;
@@ -23,7 +24,8 @@
     border-color: transparent !important;
   }
   button{
-    font-size: 17px;
+    font-size: 17px !important;
+    font-family: cassannet_plusregular;
     background-color: #fff;
     color: #333;
     border-color: #ccc;
@@ -34,10 +36,12 @@
   }
   img{height: 26px;}
   table{
-    min-width: 380px;
+    /*min-width: 380px;*/
+    width: 100%;
   }
 
   th{
+    font-size: 16px;
     background: #62c0ee;
     color: #202020;
     text-align: center;
@@ -45,6 +49,7 @@
   }
   td{
     text-align: center;
+    font-size: 16px;
     vertical-align: middle !important;
   }
   .men-rows, .women-rows{
