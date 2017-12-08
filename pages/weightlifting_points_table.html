@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <title>Weightlifting</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="font/stylesheet.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+  body{
+    font-family: 'Ubuntu Light';
+    background: rgba(21, 22, 29, .9);
+  }
+  .container{width: 100%;padding: 40px;}
+  nav{
+    text-align: center;
+    margin-top: 15px;
+  }
+  .navbar-inverse{
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+  button{
+    font-size: 17px !important;
+    font-family: cassannet_plusregular;
+    background-color: #fff;
+    color: #333;
+    border-color: #ccc;
+  }
+  .btn-default:hover, .btn-default:focus, .active{
+    background-color: #6dcfff !important;
+    border-color: #4597e6 !important;
+  }
+  img{height: 26px;}
+  table{
+    /*min-width: 380px;*/
+    width: 100%;
+  }
+
+  th{
+    font-size: 16px;
+    background: #62c0ee;
+    color: #202020;
+    text-align: center;
+    vertical-align: middle !important;
+  }
+  td{
+    text-align: center;
+    font-size: 16px;
+    vertical-align: middle !important;
+  }
+  .men-rows, .women-rows{
+    text-align: center;
+    vertical-align: middle !important;
+    background-color: #202020;
+    color: #62c0ee;
+  }
+  .men-rows:hover, .women-rows:hover{
+    background-color: #616161 !important;
+  }
+</style>
+<script>
+  $(document).ready(function () {
+    $.get('https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=18XnyCc4Yk4zPN0h7EGnyXjK0Zy-9IkvGiI-p1RpIYaE&sheet=Men',
+      function (response) {
+        var table = $('table');
+        console.log(response.Men);
+        for(var i=0;i<response.Men.length;i++){
+          var tr= document.createElement('tr');
+          var data = response.Men[i];
+          $.each(data, function (key, value) {
+            console.log(key, value);
+            var td = document.createElement('td');
+            console.log(td);
+            switch (key){
+              case 'IIT':$(td).addClass('iit_name');break;
+              case 'Gold':$(td).addClass('gold');break;
+              case 'Silver':$(td).addClass('silver');break;
+              case 'Bronze':$(td).addClass('bronze');break;
+              case 'Fourth':$(td).addClass('forth');break;
+              case 'Points':$(td).addClass('points');break;
+              default: break;
+            }
+            if(key === 'logoUrl'){
+              var name = $(tr).find('.iit_name').html();
+              $(tr).find('.iit_name').html('<img src="'+value+'"><br>'+ name +'');
+            }
+            else
+            {  $(td).html(value);
+              $(tr).addClass('men-rows');
+              $(tr).append(td);
+            }
+          });
+          if(i != (response.Men.length - 1))
+            $(table).append(tr);
+        }
+      });
+
+
+  });
+</script>
+<body>
+  <div class="container">
+  <table class="table table-bordered table-hover">
+          <tr>
+            <th class="iit_name">IIT</th>
+            <th class="gold">Gold</th>
+            <th class="silver">Silver</th>
+            <th class="bronze">Bronze</th>
+            <th class="forth">Fourth</th>
+            <th class="points">Points</th>
+          </tr>
+        </table>
+  </div>
+</body>
+</html>
