@@ -6,6 +6,7 @@
   <title>Weightlifting</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="font/stylesheet.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -15,6 +16,12 @@
     background: rgba(21, 22, 29, .9);
   }
   .container{width: 100%;padding: 40px;}
+  i{
+    position: fixed;
+    top: calc(50% - 40px);
+    left: calc(50% - 40px);
+    color: white;
+  }
   nav{
     text-align: center;
     margin-top: 15px;
@@ -97,9 +104,8 @@
           if(i != (response.Men.length - 1))
             $(table).append(tr);
         }
+        $('.container i').remove();
       });
-
-
   });
 </script>
 <body>
@@ -114,6 +120,7 @@
             <th class="points">Points</th>
           </tr>
         </table>
+    <i class="fa fa-spinner fa-pulse fa-4x fa-fw"></i>
   </div>
 </body>
 </html>
