@@ -59,13 +59,13 @@
     font-size: 16px;
     vertical-align: middle !important;
   }
-  .men-rows, .women-rows{
+  .men-rows, .women-rows, .overall-rows{
     text-align: center;
     vertical-align: middle !important;
     background-color: #202020;
     color: #62c0ee;
   }
-  .men-rows:hover, .women-rows:hover{
+  .men-rows:hover, .women-rows:hover, .overall-rows:hover{
     background-color: #616161 !important;
   }
 </style>
@@ -73,22 +73,22 @@
   $(document).ready(function () {
     $.get('https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=1nOegwLz0DXlhzSMxwoecXtAi1EOY8UL2UwFHe3C29Sc&sheet=Men',
       function (response) {
-        var table = $('table');
+        var table = $('#men');
         console.log(response.Men);
         for(var i=0;i<response.Men.length;i++){
           var tr= document.createElement('tr');
           var data = response.Men[i];
           $.each(data, function (key, value) {
-            console.log(key, value);
+//            console.log(key, value);
             var td = document.createElement('td');
-            console.log(td);
+//            console.log(td);
             switch (key){
               case 'IIT':$(td).addClass('iit_name');break;
-              case 'Gold':$(td).addClass('gold');break;
-              case 'Silver':$(td).addClass('silver');break;
-              case 'Bronze':$(td).addClass('bronze');break;
-              case 'Fourth':$(td).addClass('forth');break;
-              case 'Points':$(td).addClass('points');break;
+//              case 'Gold':$(td).addClass('gold');break;
+//              case 'Silver':$(td).addClass('silver');break;
+//              case 'Bronze':$(td).addClass('bronze');break;
+//              case 'Fourth':$(td).addClass('forth');break;
+//              case 'Points':$(td).addClass('points');break;
               default: break;
             }
             if(key === 'logoUrl'){
@@ -108,22 +108,22 @@
       });
     $.get('https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=1nOegwLz0DXlhzSMxwoecXtAi1EOY8UL2UwFHe3C29Sc&sheet=Women',
       function (response) {
-        var table = $('table');
+        var table = $('#women');
         console.log(response.Women);
         for(var i=0;i<response.Women.length;i++){
           var tr= document.createElement('tr');
           var data = response.Women[i];
           $.each(data, function (key, value) {
-            console.log(key, value);
+//            console.log(key, value);
             var td = document.createElement('td');
-            console.log(td);
+//            console.log(td);
             switch (key){
               case 'IIT':$(td).addClass('iit_name');break;
-              case 'Gold':$(td).addClass('gold');break;
-              case 'Silver':$(td).addClass('ilver');break;
-              case 'Bronze':$(td).addClass('bronze');break;
-              case 'Fourth':$(td).addClass('forth');break;
-              case 'Points':$(td).addClass('points');break;
+//              case 'Gold':$(td).addClass('gold');break;
+//              case 'Silver':$(td).addClass('ilver');break;
+//              case 'Bronze':$(td).addClass('bronze');break;
+//              case 'Fourth':$(td).addClass('forth');break;
+//              case 'Points':$(td).addClass('points');break;
               default: break;
             }
             if(key === 'logoUrl'){
@@ -132,7 +132,7 @@
             }
             else
             {  $(td).html(value);
-              $(tr).addClass('women-rows hide');
+              $(tr).addClass('women-rows');
               $(tr).append(td);
             }
           });
@@ -140,17 +140,62 @@
             $(table).append(tr);
         }
       });
+
+    $.get('https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=1nOegwLz0DXlhzSMxwoecXtAi1EOY8UL2UwFHe3C29Sc&sheet=Overall',
+      function (response) {
+        var table = $('#overall');
+        console.log(response.Overall);
+        for(var i=0;i<response.Overall.length;i++){
+          var tr= document.createElement('tr');
+          var data = response.Overall[i];
+          $.each(data, function (key, value) {
+//            console.log(key, value);
+            var td = document.createElement('td');
+//            console.log(td);
+            switch (key){
+              case 'IIT':$(td).addClass('iit_name');break;
+//              case 'Gold':$(td).addClass('gold');break;
+//              case 'Silver':$(td).addClass('ilver');break;
+//              case 'Bronze':$(td).addClass('bronze');break;
+//              case 'Fourth':$(td).addClass('forth');break;
+//              case 'Points':$(td).addClass('points');break;
+              default: break;
+            }
+            if(key === 'logoUrl'){
+              var name = $(tr).find('.iit_name').html();
+              $(tr).find('.iit_name').html('<img src="'+value+'"><br>'+ name +'');
+            }
+            else
+            {  $(td).html(value);
+              $(tr).addClass('overall-rows');
+              $(tr).append(td);
+            }
+          });
+          if(i != (response.Overall.length - 1))
+            $(table).append(tr);
+        }
+      });
+
     $('.men-btn').click(function () {
       $('.men-btn').addClass('active');
-      $('.women-btn').removeClass('active');
-      $('.men-rows').removeClass('hide');
-      $('.women-rows').addClass('hide');
+      $('.men-btn').siblings().removeClass('active');
+      $('#men').removeClass('hide');
+      $('#men').siblings().addClass('hide');
+      $('nav').removeClass('hide');
     });
     $('.women-btn').click(function () {
       $('.women-btn').addClass('active');
-      $('.men-btn').removeClass('active');
-      $('.women-rows').removeClass('hide');
-      $('.men-rows').addClass('hide');
+      $('.women-btn').siblings().removeClass('active');
+      $('#women').removeClass('hide');
+      $('#women').siblings().addClass('hide');
+      $('nav').removeClass('hide');
+    });
+    $('.overall-btn').click(function () {
+      $('.overall-btn').addClass('active');
+      $('.overall-btn').siblings().removeClass('active');
+      $('#overall').removeClass('hide');
+      $('#overall').siblings().addClass('hide');
+      $('nav').removeClass('hide');
     });
   });
 </script>
@@ -160,16 +205,55 @@
       <div class="container-fluid">
         <button class="men-btn btn btn-default active">MEN</button>
         <button class="women-btn btn btn-default">WOMEN</button>
+        <button class="overall-btn btn btn-default">Overall</button>
       </div>
     </nav>
-  <table class="table table-bordered table-hover">
+  <table id="men" class="table table-bordered table-hover">
           <tr>
             <th class="iit_name">IIT</th>
-            <th class="gold">Gold</th>
-            <th class="silver">Silver</th>
-            <th class="bronze">Bronze</th>
-            <th class="forth">Fourth</th>
-            <th class="points">Points</th>
+            <th>Athletics</th>
+            <th>Badminton</th>
+            <th>Basketball</th>
+            <th>Cricket</th>
+            <th>Football</th>
+            <th>Hockey</th>
+            <th>Squash</th>
+            <th>Table Tennis</th>
+            <th>Tennis</th>
+            <th>Volleyball</th>
+            <th>Weightlifting</th>
+            <th>Waterpolo</th>
+            <th>Swimming</th>
+          </tr>
+        </table>
+  <table id="women" class="hide table table-bordered table-hover">
+          <tr>
+            <th class="iit_name">IIT</th>
+            <th>Athletics</th>
+            <th>Badminton</th>
+            <th>Basketball</th>
+            <th>Table Tennis</th>
+            <th>Tennis</th>
+            <th>Volleyball</th>
+            <th>Swimming</th>
+          </tr>
+        </table>
+  <table id="overall" class="hide table table-bordered table-hover">
+          <tr>
+            <th class="iit_name">IIT</th>
+            <th>Athletics</th>
+            <th>Badminton</th>
+            <th>Basketball</th>
+            <th>Cricket</th>
+            <th>Football</th>
+            <th>Hockey</th>
+            <th>Squash</th>
+            <th>Table Tennis</th>
+            <th>Tennis</th>
+            <th>Volleyball</th>
+            <th>Weightlifting</th>
+            <th>Waterpolo</th>
+            <th>Swimming</th>
           </tr>
         </table>
     <i class="fa fa-spinner fa-pulse fa-4x fa-fw"></i>
